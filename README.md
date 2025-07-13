@@ -1,69 +1,141 @@
-# LightWeightMTGProxy
-Generating lightweight proxies for playtesting Magic: The Gathering
+# LightWeightCardPrototiping
 
+Genera cartas de forma rapida y sencilla para tus prototipos
 
-## Description
-This project came from a desire for a quick, easy, simple, and cheap way to print proxy cards at home for Magic: The Gathering.
+## Descripcion
 
-Many of the tools found online at the time were based on high-res scans and the ones that weren't looked nothing like magic cards.
+Este proyecto esta basado en https://github.com/tilleraj/LightWeightMTGProxy, cerca del 80% del codigo les pertenece, sobre todo el relativo a la generacion de las cartas utilizando cairo
 
-Our goal was to have something in the middle, a card that looked and felt familiar but was obviously not real and didn't use up all your ink.
+## Descripcion
 
-The project accepts deck lists in the form of CSV's. It ignores the top line and assumes the first two columns are Quantity and Card Name respectively.
+El objetivo de este proyecto es facilitar la generacion de cartas para prototipos de juegos de mesa automatizando en la medida de lo posible las tareas de añadir una imagen asi como el texto relativo a la carta. Esta automatizacion se realiza definiendo la carta en un archivo de texto.
 
-## Getting Started
-Basically, all that is required to run is [Python 3.6](https://www.python.org/) (Yes, actually 3.6 or newer; 3.5 will not work.) and [PyCairo](https://cairographics.org/pycairo/). Depending on how you may use Python for other things, there are a few options for getting those installed. The instructions below are intended to be as simple as possible.  
-#### Note on AllCards.json:
-Since starting this project, the team at mtgjson has been very busy (and a lot of cards have been released). As such, the size of the AllCards.json file has balooned large enough for GitHub to be angry about it. Please download the file directly from [their website](https://mtgjson.com/downloads/all-files/) and place it in the same directory as `main.py`
+## Primero Pasos
+
+En principio todo lo que se necesita para ejecutar este script es python 3.9 instalado en tu ordenador
 
 ### Windows
-- Download and install Python 3 using [the installer](https://www.python.org/downloads/windows/)
-- Download this precompiled PyCairo [wheel file](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pycairo)
-- Run `pip install path\to\wheel_file.whl` to install PyCairo in a shell
-- Make a .csv deck list and run `python path\to\LightWeighMTGProxy\main.py my_decklist.csv`
 
-### MacOS
-- Install [Homebrew](https://brew.sh/) if you haven't already
-- Install Python 3 using `brew install python3` or upgrade it to the latest version
-- Install cairo and pkg-config with `brew install cairo pkg-config` (required for PyCairo)
-- Install PyCairo using `pip install PyCairo`.
-- Make a .csv deck list and run `python path/to/LightWeighMTGProxy/main.py my_decklist.csv`
+- descargar la version 3.7 hasta la 3.9 de Python o crear un entorno virtaul con vitualenv
+- Descarga e instala Python 3 [Link](https://www.python.org/downloads/windows/)
+- Abre una consola CMD
+- Ejecuta pip install -r requirements.txt
 
-## Sources and Documentation
-### Card Text
-The text layout is done using PyCairo. You can find their documentation at the link below. The website is kind of a mess and this is the one you want.
-- Docs: https://pycairo.readthedocs.io/en/latest/
+## virtual env para windows
 
-Any and all praise for card copy should go to people behind MTGJSON. They made this project infinitely easier by providing the "database" of all Magic cards in a nice clean file.
-- Website: http://mtgjson.com/
-- GitHub: http://github.com/mtgjson/mtgjson
+- para generar su ambiente de Python con **venv**
 
-### Images, .PSDs, and fonts
-The source fils for making the layout images were gotten from the thread created by .Rai at Cardgame Coalition entitled "HD MtG Card Template: Deluxe Edition!"
-- Thread: http://cardgamecoalition.forumotion.com/t789-hd-mtg-card-template-deluxe-edition
+instalar Pyhton como se indica arriba
 
-.Rai sites that his work is derivative of Pichoro at MTG Salvation. Based on the age of the .Rai's thread, I think the below is the thread he refers to.
-- Thread: http://www.mtgsalvation.com/forums/community-forums/creativity/artwork/tutorials/341578-new-psd-links-thread-last-update-on-06-16-2012
+ejecute
 
+```
+python -m venv venv
+```
 
-## Legal
-Official Statement from Elaine Chase, Vice President of Global Brand Strategy and Marketing for Wizards of the Coast (Jan 14, 2016)
-https://magic.wizards.com/en/articles/archive/news/proxies-policy-and-communication-2016-01-14
+lo cual crea tu ambiente virtual en la misma ruta del proyecto
 
-### tl;dr
-We aren't lawyers, but...
+ejecute
 
-We aren't trying to make reproductions, we don't use official art, what we're producing wouldn't pass as the real thing, and WotC **IS OKAY** with this kind of behavior.
+```
+venv/Scripts\activate
+```
 
-### Original Copy and Emphasis. (Edited for Brevity)
-[L]et's clear things up.
+para activar el ambiente y ejecute la instalacion de dependencias
 
-**Our stated policy specifically applies to DCI-sanctioned events. Cards used in DCI-sanctioned events must be authentic *Magic* cards.** The only exception is if a card has become damaged during the course of play in a particular event.
+```
+pip install -r requirements.txt
+```
 
-**Our stance on counterfeits is also clear: Wizards remains committed to vigorously protecting the *Magic* community from counterfeiters.** [A]ny individual or retailer who knowingly deals in counterfeits works against the best interests of the community. Wizards has eliminated and will continue to eliminate from the DCI and WPN anyone who knowingly distributes counterfeit cards.
+para finalizar el entorno vitual
+ejecute en la terminal
 
-What has gotten caught up in the confusion are playtest cards used outside of sanctioned DCI events. 
+```
+deactivate
+```
 
-A playtest card is most commonly a basic land with the name of a different card written on it with a marker. Playtest cards aren't trying to be reproductions of real *Magic* cards; they don't have official art and they wouldn't pass even as the real thing under the most cursory glance. Fans use playtest cards to test out new deck ideas before building out a deck for real and bringing it to a sanctioned tournament. And that's perfectly fine with us. **Wizards of the Coast has no desire to police playtest cards made for personal, non-commercial use, even if that usage takes place in a store.**
+### Linux
 
-What we really care about is that DCI-sanctioned events use only authentic *Magic* cards, and that we stop counterfeits.
+- Descarga e instala Python 3 utilizando el gestor de paquetes de tu distribucion
+- Abre una consola
+- Ejecuta pip install -r requirements.txt
+
+## Documentacion
+
+### Sintaxis
+
+```
+usage: LWCProto.py [-h] -d FILE -c FILE [-i] [-r RGB RGB RGB] [-l FILE]
+
+Deck Generator for Game Designers
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d FILE, --deck FILE  csv file containing the deck
+  -c FILE, --cards FILE
+                        json file containing cards description
+  -i, --images          Add images to cards
+  -r RGB RGB RGB, --rgb RGB RGB RGB
+                        Update layout card border colour with given R,G,B, only works with default layout
+  -l FILE, --layout FILE (==> Not ready yet)
+                        Use a different layout than default
+```
+
+ejemplo de ejecucion sin layoud
+
+```
+python .\LWCProto.py -d .\example_deck.csv -c .\1.json  -i
+```
+
+ejemplo de ejecucion con layoud
+
+```
+ python .\LWCProto.py -d .\example_deck.csv -c .\1.json  -i -l .\layout.png
+```
+
+### Archivo de definicion de cartas:
+
+El archivo de definicion de cartas es un archivo en jormato json con el siguente formato:
+
+```
+
+{
+    //example
+    "Chain Lightning": {
+        "name": "nombre 1",
+        "type": "Evento",
+        "subtype": "Obligatorio",
+        "text": "este es un texto de prueba",
+        "manaCost": "5/6 * {r}",
+        "power": 24,
+        "toughness": 50,
+        "image": "BarcoPirata.jpg"
+    },
+    //structure
+    "CartID":
+        {
+            "name": "str",
+            "type": "str",
+            "subtype": "str",
+            "text": "str",
+            "manaCost": "str",
+            "power": int,
+            "toughness": int,
+            "image": "str"
+        },
+        ....
+}
+
+```
+
+Las imagenes deben almacenarse en el directorio "images" que se encuentra en la misma carpeta que LWCProto.py, el formato de las imagenes es indiferente y su tamaño tambien estas seran redimensionadas automaticamente para adaptarse al tamaño disponible en el layout
+
+### Archivo de definicion del mazo
+
+Archivo en formato csv que tiene el siguiente formato:
+
+se adjunta archivos de pruebas 1.json y example_deck.csv
+
+## Fuentes
+
+Este proyecto se basa en el original [LightWeithgMTGProxy](https://github.com/tilleraj/LightWeightMTGProxy) todo el credito le pertenece a él, hacemos extensivo sus agradecimientos a .Rai de Cardgame Coalition creador del layout original que estamos utilizando

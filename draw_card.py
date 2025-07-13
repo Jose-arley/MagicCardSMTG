@@ -38,6 +38,11 @@ def showWrappedText(
 
 
 def drawCard(card: card_model.CardModel , ctx: cairo.Context):
+
+    #Set background colour
+    #ctx.set_source_rgb(0.3, 0.3, 1.0)
+    #ctx.paint()
+
     ctx.select_font_face('serif')
     
     # Draw name
